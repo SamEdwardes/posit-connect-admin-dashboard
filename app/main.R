@@ -6,6 +6,7 @@ box::use(
 box::use(
   app/view/index,
   app/view/users,
+  app/view/content,
 )
 
 #' @export
@@ -14,13 +15,17 @@ ui <- function(id) {
   page_navbar(
     title = "Connect Admin Dashboard",
     nav_panel(
+      "Users",
+      users$ui(ns("users"))
+    ),
+    nav_panel(
       "Home",
       index$ui(ns("index")),
     ),
     nav_panel(
-      "Users",
-      users$ui(ns("users"))
-    )
+      "Content",
+      content$ui(ns("content"))
+    ),
   )
 }
 
@@ -31,5 +36,6 @@ server <- function(id) {
     
     index$server("index")
     users$server("users")
+    content$server("content")
   })
 }
